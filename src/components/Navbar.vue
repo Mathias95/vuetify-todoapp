@@ -14,6 +14,16 @@
         </v-toolbar>
 
         <v-navigation-drawer app class="primary" v-model="drawer">
+            <v-layout column align-center>
+                <v-flex class="mt-5 text-xs-center">
+                    <v-avatar size="100">
+                        <img src="/avatar-1.png" alt="">
+                    </v-avatar>
+                    <p class="mt-2 white--text subheading">
+                        Mathias Jacobsen
+                    </p>
+                </v-flex>
+            </v-layout>
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>
