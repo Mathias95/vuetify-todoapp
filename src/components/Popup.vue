@@ -1,5 +1,5 @@
 <template>
-    <v-dialog max-width="600px">
+    <v-dialog max-width="600px" v-model="dialog">
         <v-btn flat slot="activator" class="success">
             Add new project
         </v-btn>
@@ -19,7 +19,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <v-btn flat class="success mx-0 mt-3" @click="submit">
+                    <v-btn flat class="success mx-0 mt-3" @click="submit" :loading="loading">
                         Add project
                     </v-btn>
                 </v-form>
@@ -43,12 +43,16 @@ export default {
             ],
             dateRules: [
                 d => d&& d.length >= 3 || 'Date must be filled out'
-            ]
+            ],
+            loading: false,
+            dialog: false
         }
     },
     methods: {
         submit(){
             if(this.$refs.form.validate()){
+                this.loading = true
+
                 const project = {
                     title: this.title,
                     content: this.content,
@@ -58,7 +62,7 @@ export default {
                 }
 
                 db.collection('projects').add(project).then(() =>{
-                    console.log('added to db')
+                    this.loading = false
                 })
             }
         }
