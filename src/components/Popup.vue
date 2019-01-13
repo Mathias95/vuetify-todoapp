@@ -51,7 +51,7 @@ export default {
     methods: {
         submit(){
             if(this.$refs.form.validate()){
-                this.loading = true
+                this.loading = true;
 
                 const project = {
                     title: this.title,
@@ -62,7 +62,9 @@ export default {
                 }
 
                 db.collection('projects').add(project).then(() =>{
-                    this.loading = false
+                    this.loading = false;
+                    this.dialog = false;
+                    this.$emit('projectAdded')
                 })
             }
         }
